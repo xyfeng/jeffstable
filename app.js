@@ -128,11 +128,13 @@ function addEmojis(){
     bd.set_position(getRandomImagePos());
     var body = world.CreateBody(bd);
     body.CreateFixture(shape, Math.random()*10);
+    body.SetActive(false);
     images.push({
       i: document.getElementById(img.name),
       w: img.width*imageSize/PTM/128,
       h: img.height*imageSize/PTM/128,
-      s: 0, // for detect motion stop
+      f: 0, // frames
+      d: i * 60, //delays
       bd: body
     });
   }
@@ -186,13 +188,29 @@ function addWords() {
 
 function drawImages(){
   images.forEach((item, index) => {
-    var speed = item.bd.GetLinearVelocity().Length();
-    item.s = 0.1 * speed + 0.9 * item.s;
-    if(item.s < 0.1){
-      item.bd.SetTransform(getRandomImagePos(), 0);
-      item.s = 0;
+    item.f = item.f + 1;
+    if(item.f < item.d) {
       return;
     }
+    else if(item.f === item.d){
+      item.bd.SetActive(true);
+    }
+    if(item.f-item.d > 600){
+      item.f = item.d;
+      item.bd.SetTransform(getRandomImagePos(), 0);
+      item.bd.SetLinearVelocity(0);
+      item.bd.SetAngularVelocity(0);
+      return;
+    }
+    // var speed = item.bd.GetLinearVelocity().Length();
+    // item.s = 0.1 * speed + 0.9 * item.s;
+    // if(item.s < 0.1){
+    //   item.bd.SetTransform(getRandomImagePos(), 0);
+    //   item.bd.SetLinearVelocity(0);
+    //   item.bd.SetAngularVelocity(0);
+    //   item.s = 0;
+    //   return;
+    // }
     var pos = item.bd.GetPosition();
     var angle = item.bd.GetAngle();
     var offsetX = pos.get_x();
