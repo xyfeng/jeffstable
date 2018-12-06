@@ -1,0 +1,23 @@
+{
+  "name": "jeffstable",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xyfeng/jeffstable.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xyfeng/jeffstable/issues"
+  },
+  "homepage": "https://github.com/xyfeng/jeffstable#readme",
+  "devDependencies": {
+    "fs": "0.0.1-security",
+    "image-size": "^0.6.3"
+  }
+}
